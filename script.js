@@ -1,67 +1,57 @@
-const gameContainer = document.getElementsById("game");
+const parentContainer = document.querySelector("#parent");
+const headerBar = document.querySelector("#header");
+const homeButton = document.querySelector("#home-button");
+const gameBoard = document.querySelector("#game-container");
+const resetBtn = document.querySelector("#btn-reset");
+const homeBtn = document.querySelector("#btn-home");
 
-const COLORS = [
-  "red",
-  "blue",
-  "green",
-  "orange",
-  "purple",
-  "red",
-  "blue",
-  "green",
-  "orange",
-  "purple"
+
+const colors = [
+    "red",
+    "blue",
+    "green",
+    "orange",
+    "purple",
+    "red",
+    "blue",
+    "green",
+    "orange",
+    "purple"
 ];
 
-// here is a helper function to shuffle an array
-// it returns the same array with values shuffled
-// it is based on an algorithm called Fisher Yates if you want ot research more
-function shuffle(array) {
-  let counter = array.length;
+function shuffleArray(array) {
+    for (let index = array.length - 1; index > 0; index--) {
+        const randomIndex = Math.floor(Math.random() * (index + 1));
+        [array[index], array[randomIndex]] = [array[randomIndex], array[index]];
+    }
 
-  // While there are elements in the array
-  while (counter > 0) {
-    // Pick a random index
-    let index = Math.floor(Math.random() * counter);
-
-    // Decrease counter by 1
-    counter--;
-
-    // And swap the last element with it
-    let temp = array[counter];
-    array[counter] = array[index];
-    array[index] = temp;
-  }
-
-  return array;
+    return array;
 }
 
-let shuffledColors = shuffle(COLORS);
+function createCards(colorArray) {
+    shuffleArray(colors);
+    for (let color of colorArray) {
+        const frontCard = document.createElement("div")
+        frontCard.classList.add("card", "front-card");
 
-// this function loops over the array of colors
-// it creates a new div and gives it a class with the value of the color
-// it also adds an event listener for a click for each card
-function createDivsForColors(colorArray) {
-  for (let color of colorArray) {
-    // create a new div
-    const newDiv = document.createElement("div");
+        const backCard = document.createElement("div");
+        backCard.classList.add(color, "card", "back-card");
 
-    // give it a class attribute for the value we are looping over
-    newDiv.classList.add(color);
-
-    // call a function handleCardClick when a div is clicked on
-    newDiv.addEventListener("click", handleCardClick);
-
-    // append the div to the element with an id of game
-    gameContainer.append(newDiv);
-  }
+        gameBoard.appendChild(frontCard);
+        gameBoard.appendChild(backCard);
+    }
 }
 
-// TODO: Implement this function!
-function handleCardClick(event) {
-  // you can use event.target to see which element was clicked
-  console.log("you clicked",event.target);
-}
+createCards(colors);
 
-// when the DOM loads
-createDivsForColors(shuffledColors);
+parentContainer.addEventListener("click", function (event) {
+
+    console.log(event.target);
+    if (event.target.id == "btn-reset") {
+        location.reload();
+    }
+
+    
+
+
+}, false)
