@@ -5,6 +5,9 @@ const gameBoard = document.querySelector("#game-container");
 const resetBtn = document.querySelector("#btn-reset");
 const homeBtn = document.querySelector("#btn-home");
 const matchMessage = document.querySelector("#match-message")
+const createGameColor = document.querySelector("#new-game-color");
+const home = document.querySelector("#home");
+const gameButtons = document.querySelector("#btn-container")
 
 let firstCard, secondCard;
 let hasFlipped = false;
@@ -69,16 +72,16 @@ parentContainer.addEventListener("click", function (event) {
     if (clickedCount == 2) {
         if (firstCard.id != secondCard.id) {
             matchMessage.textContent = "retry";
-            firstCard.classList.remove("blocked");
-            secondCard.classList.remove("blocked");
             setTimeout(function () {
+                firstCard.classList.remove("blocked");
+                secondCard.classList.remove("blocked");
                 firstCard.classList.remove(firstCard.id);
                 secondCard.classList.remove(secondCard.id);
                 clickedCount = 0;
-                setTimeout(function () {
-                    matchMessage.textContent = "";
-                }, 1000)
             }, 1000);
+            setTimeout(function () {
+                matchMessage.textContent = "";
+            }, 1000)
         } else if (firstCard.id == secondCard.id) {
             matchMessage.textContent = "you got a match";
             clickedCount = 0;
@@ -87,7 +90,19 @@ parentContainer.addEventListener("click", function (event) {
 
     }
 
-
-
-
 }, false)
+
+
+createGameColor.addEventListener("click", function (event) {
+    home.style["display"] = "none";
+    gameBoard.style["display"] = "flex";
+    gameButtons.style["display"] = "flex";
+
+})
+
+homeButton.addEventListener("click", function (event) {
+    home.style["display"] = "flex";
+    gameBoard.style["display"] = "none";
+    gameButtons.style["display"] = "none";
+
+})
