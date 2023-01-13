@@ -16,9 +16,33 @@
         <i class="fa-solid fa-house fa-4x" id="home-button"></i>
       </section>
 
-      <h4 id="match-message"></h4>
-      <h3 id="win-message"></h3>
-      <section id="game-container"></section>
+      <div id="home" class="home">
+        <h4>Instructions</h4>
+        <ol class="instruction-list" type="number">
+          <li>The game will display a set of cards face down on the screen.</li>
+          <li>Click on two cards to flip them over and reveal their images.</li>
+          <li>
+            If the images match, they will stay face up and you can continue to
+            the next pair.
+          </li>
+          <li>
+            If the images do not match, the cards will flip back over and you
+            can try again.
+          </li>
+          <li>The game ends when all pairs have been found.</li>
+        </ol>
+        <div id="new-game-btns">
+          <button id="new-game-color">New Game (Color)</button>
+          <button id="new-game-gif">New Game (Gif)</button>
+        </div>
+      </div>
+
+      <section id="game-container">
+        <div class="message">
+          <h4 id="match-message"></h4>
+          <h3 id="win-message"></h3>
+        </div>
+      </section>
 
       <div class="btn-container" id="btn-container">
         <button id="btn-reset">Reset</button>
