@@ -28,7 +28,7 @@ body {
 #game-container {
   display: flex;
   flex-wrap: wrap;
-  border: 1px solid red;
+  /* border: 1px solid red; */
   width: 85vw;
   height: 70vh;
   margin: auto;
