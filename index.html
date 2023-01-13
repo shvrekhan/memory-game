@@ -1,13 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>Memory game
+  <head>
     <meta charset="UTF-8" />
     <title>Memory Game!</title>
     <link rel="stylesheet" href="style.css" />
+    <script
+      src="https://kit.fontawesome.com/a44113e352.js"
+      crossorigin="anonymous"
+    ></script>
   </head>
   <body>
-    <h1>Memory Game!</h1>
-    <div id="game">
+    <div class="parent-container" id="parent">
+      <section class="header" id="header">
+        <h2 class="game-name" id="name-heading">Memory Game</h2>
+        <i class="fa-solid fa-house fa-4x" id="home-button"></i>
+      </section>
+
+      <section id="game-container"></section>
+
+      <div class="btn-container" id="btn-container">
+        <button id="btn-reset">Reset</button>
+        <button id="btn-home">Home</button>
+      </div>
+    </div>
     <script src="script.js"></script>
   </body>
 </html>
