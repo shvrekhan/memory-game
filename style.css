@@ -210,6 +210,12 @@ li {
   font-size: 1rem;
 }
 
+#current-stat {
+  display: flex;
+  justify-content: space-around;
+  font-size: 1rem;
+}
+
 @media screen and (max-device-width: 480px) {
   #parent {
     display: flex;
