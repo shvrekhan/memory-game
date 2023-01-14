@@ -105,7 +105,7 @@ gameBoard.addEventListener("click", function (event) {
             } else if (firstCard.id == secondCard.id) {
                 clickedCount = 0;
                 totalMatch++;
-                matchMessage.textContent = "you got a match";
+                matchMessage.textContent = "You got a match!";
                 currentScore.textContent = `Current Score - ${totalMatch}`;
                 setTimeout(function () {
                     matchMessage.textContent = "";
