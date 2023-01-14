@@ -23,13 +23,13 @@ let totalMatch = 0;
 let previousResult = localStorage.getItem("Best Result - ");
 
 const colors = [
-    "red",
+    "pink",
     "blue",
-    "green",
+    "voilet",
     "orange",
     "purple",
-    "red",
-    "blue",
+    "pink",
+    "voilet",
     "green",
     "orange",
     "purple"
@@ -106,7 +106,8 @@ gameBoard.addEventListener("click", function (event) {
         if (clickedCount == 2) {
             event.stopPropagation();
             if (firstCard.id != secondCard.id) {
-
+                firstCard.style["border"] = " 0.4rem solid red";
+                secondCard.style["border"] = " 0.4rem solid red";
                 matchMessage.textContent = "Match failed !!!";
 
                 setTimeout(function () {
@@ -115,6 +116,9 @@ gameBoard.addEventListener("click", function (event) {
                     secondCard.classList.remove("blocked");
                     firstCard.classList.remove(firstCard.id);
                     secondCard.classList.remove(secondCard.id);
+                    firstCard.style.border = null;
+                    secondCard.style.border = null;
+
                 }, 1000);
                 setTimeout(function () {
                     matchMessage.textContent = "";
@@ -122,6 +126,8 @@ gameBoard.addEventListener("click", function (event) {
             } else if (firstCard.id == secondCard.id) {
                 clickedCount = 0;
                 totalMatch++;
+                firstCard.style["border"] = " 0.4rem solid green";
+                secondCard.style["border"] = " 0.4rem solid green";
                 matchMessage.textContent = "You got a match!";
                 currentScore.textContent = `Current Score - ${totalMatch}`;
                 setTimeout(function () {
