@@ -13,6 +13,9 @@ const newGame = document.querySelector("#new-game");
 const currentScore = document.querySelector("#score");
 const createNewGame = document.querySelector("#create-new-game");
 const bestScore = document.querySelector("#best-score");
+const currentCounts = document.querySelector("#current-counts");
+const timer = document.querySelector("#timer");
+const currentStats = document.querySelector("#current-stat")
 
 
 let firstCard, secondCard;
@@ -20,7 +23,10 @@ let clickedCount = 0;
 let totalCount = 0;
 let totalMatch = 0;
 
-let previousResult = localStorage.getItem("Best Result - ");
+let previousResult = localStorage.getItem("Best");
+if (previousResult == null) {
+    localStorage.setItem("Best", "9999");
+}
 
 const colors = [
     "pink",
@@ -36,6 +42,7 @@ const colors = [
 ];
 
 function shuffleArray(array) {
+    
     for (let index = array.length - 1; index > 0; index--) {
         const randomIndex = Math.floor(Math.random() * (index + 1));
         [array[index], array[randomIndex]] = [array[randomIndex], array[index]];
@@ -54,10 +61,12 @@ function createCards(colorArray) {
         backCard.classList.add("card", "back-card", `${counter++}`);
         gameBoard.appendChild(backCard);
     }
-    if (previousResult != null) {
+    if (Number(previousResult) == 9999 || previousResult == null) {
+        bestScore.textContent = `Best Score - First time play`;
+    } else {
         bestScore.textContent = `Best Score - ${previousResult}`;
-
     }
+
 }
 
 createCards(colors);
@@ -67,18 +76,25 @@ createGameColor.addEventListener("click", function (event) {
     gameBoard.style["display"] = "flex";
     gameButtons.style["display"] = "flex";
     currentScore.textContent = `Current Score - ${totalMatch}`;
+    let i = 0;
+});if (previousResult != null) {
+    bestScore.textContent = `Best Score - ${previousResult}`;
 
-
-});
+}
 
 homeButton.addEventListener("click", function (event) {
 
     home.style["display"] = "flex";
     gameBoard.style["display"] = "none";
     gameButtons.style["display"] = "none";
-    if (previousResult != null) {
+    currentStats.style["display"] = "none";
+    if (Number(previousResult) == 9999 || previousResult == null) {
+        bestScore.textContent = `Best Score - First time play`;
+    } else {
+
         bestScore.textContent = `Best Score - ${previousResult}`;
     }
+
 
 });
 
@@ -93,6 +109,7 @@ gameBoard.addEventListener("click", function (event) {
             firstCard.classList.add("blocked");
             clickedCount++;
             totalCount++;
+            currentCounts.textContent = `Total guess - ${totalCount}`;
 
         } else if (clickedCount == 1 && !(event.target.classList.contains("blocked"))) {
 
@@ -101,6 +118,7 @@ gameBoard.addEventListener("click", function (event) {
             secondCard.classList.add("blocked");
             clickedCount++;
             totalCount++;
+            currentCounts.textContent = `Total guess - ${totalCount}`;
         }
 
         if (clickedCount == 2) {
@@ -138,8 +156,10 @@ gameBoard.addEventListener("click", function (event) {
         }
 
         if (totalMatch == 5) {
-            localStorage.setItem("Best Result - ", JSON.stringify(totalCount) + " counts");
-            if (previousResult > totalCount) {
+            console.log(previousResult);
+            if (Number(previousResult) > totalCount || previousResult == null) {
+                console.log("ok");
+                localStorage.setItem("Best", JSON.stringify(totalCount));
             }
 
             setTimeout(function () {
