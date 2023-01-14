@@ -29,8 +29,8 @@ const colors = [
     "orange",
     "purple",
     "pink",
+    "blue",
     "voilet",
-    "green",
     "orange",
     "purple"
 ];
