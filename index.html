@@ -13,6 +13,7 @@
     <div class="parent-container" id="parent">
       <section class="header" id="header">
         <h2 class="game-name" id="name-heading">Memory Game</h2>
+        <h4 id="score"></h4>
         <i class="fa-solid fa-house fa-4x" id="home-button"></i>
       </section>
 
@@ -32,20 +33,19 @@
           <li>The game ends when all pairs have been found.</li>
         </ol>
         <div id="new-game-btns">
-          <button id="new-game-color">New Game (Color)</button>
-          <button id="new-game-gif">New Game (Gif)</button>
+          <button id="new-game-color">Resume Game</button>
+          <button id="create-new-game">New Game</button>
         </div>
       </div>
 
-      <section id="game-container">
-        <div class="message">
-          <h4 id="match-message"></h4>
-          <h3 id="win-message"></h3>
-        </div>
-      </section>
+      <div class="message">
+        <h4 id="match-message"></h4>
+        <h3 id="win-message"></h3>
+      </div>
+      <main id="game-container"></main>
 
       <div class="btn-container" id="btn-container">
-        <button id="btn-reset">Reset</button>
+        <button id="new-game">New Game</button>
         <button id="btn-home">Home</button>
       </div>
     </div>
