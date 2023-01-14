@@ -117,6 +117,10 @@ gameBoard.addEventListener("click", function (event) {
             setTimeout(function () {
                 winMessage.textContent = "Congratulations! You have successfully matched all the cards and won the memory game!";
             }, 1000);
+            setTimeout(function () {
+                winMessage.textContent = "";
+            }, 1600);
+
         }
 
     }
