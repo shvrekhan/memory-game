@@ -12,10 +12,15 @@ const gameButtons = document.querySelector("#btn-container");
 const newGame = document.querySelector("#new-game");
 const currentScore = document.querySelector("#score");
 const createNewGame = document.querySelector("#create-new-game");
+const bestScore = document.querySelector("#best-score");
+
 
 let firstCard, secondCard;
 let clickedCount = 0;
+let totalCount = 0;
 let totalMatch = 0;
+
+let previousResult = localStorage.getItem("Best Result - ");
 
 const colors = [
     "red",
@@ -38,7 +43,9 @@ function shuffleArray(array) {
 
     return array;
 }
+
 let counter = 1;
+
 function createCards(colorArray) {
     shuffleArray(colors);
     for (let color of colorArray) {
@@ -47,9 +54,14 @@ function createCards(colorArray) {
         backCard.classList.add("card", "back-card", `${counter++}`);
         gameBoard.appendChild(backCard);
     }
+    if (previousResult != null) {
+        bestScore.textContent = `Best Score - ${previousResult}`;
+
+    }
 }
 
 createCards(colors);
+
 createGameColor.addEventListener("click", function (event) {
     home.style["display"] = "none";
     gameBoard.style["display"] = "flex";
@@ -57,17 +69,21 @@ createGameColor.addEventListener("click", function (event) {
     currentScore.textContent = `Current Score - ${totalMatch}`;
 
 
-})
+});
 
 homeButton.addEventListener("click", function (event) {
+
     home.style["display"] = "flex";
     gameBoard.style["display"] = "none";
     gameButtons.style["display"] = "none";
+    if (previousResult != null) {
+        bestScore.textContent = `Best Score - ${previousResult}`;
+    }
 
-})
+});
 
 gameBoard.addEventListener("click", function (event) {
-    const tag = event.target.tagName
+    const tag = event.target.tagName;
     if (event.target.nodeName == "DIV" && clickedCount < 2) {
 
         if (clickedCount == 0 && !(event.target.classList.contains("blocked"))) {
@@ -76,6 +92,7 @@ gameBoard.addEventListener("click", function (event) {
             firstCard = event.target;
             firstCard.classList.add("blocked");
             clickedCount++;
+            totalCount++;
 
         } else if (clickedCount == 1 && !(event.target.classList.contains("blocked"))) {
 
@@ -83,6 +100,7 @@ gameBoard.addEventListener("click", function (event) {
             secondCard = event.target;
             secondCard.classList.add("blocked");
             clickedCount++;
+            totalCount++;
         }
 
         if (clickedCount == 2) {
@@ -100,7 +118,7 @@ gameBoard.addEventListener("click", function (event) {
                 }, 1000);
                 setTimeout(function () {
                     matchMessage.textContent = "";
-                }, 1000)
+                }, 1000);
             } else if (firstCard.id == secondCard.id) {
                 clickedCount = 0;
                 totalMatch++;
@@ -114,12 +132,16 @@ gameBoard.addEventListener("click", function (event) {
         }
 
         if (totalMatch == 5) {
+            localStorage.setItem("Best Result - ", JSON.stringify(totalCount) + " counts");
+            if (previousResult > totalCount) {
+            }
+
             setTimeout(function () {
                 winMessage.textContent = "Congratulations! You have successfully matched all the cards and won the memory game!";
-            }, 1000);
+            }, 1 * 1000);
             setTimeout(function () {
                 winMessage.textContent = "";
-            }, 1600);
+            }, 1.5 * 1000);
 
         }
 
@@ -127,25 +149,26 @@ gameBoard.addEventListener("click", function (event) {
 }, false);
 
 newGame.addEventListener("click", function (event) {
-    while (gameBoard.firstChild) {
-        gameBoard.removeChild(gameBoard.firstChild);
+    for (let index = gameBoard.childNodes.length - 1; index >= 0; index--) {
+        gameBoard.removeChild(gameBoard.childNodes[index]);
     }
     shuffleArray(colors);
     createCards(colors);
     totalMatch = 0;
     clickedCount = 0;
     currentScore.textContent = `Current Score - ${totalMatch}`;
-})
+});
 
 homeBtn.addEventListener("click", function (event) {
     home.style["display"] = "flex";
     gameBoard.style["display"] = "none";
     gameButtons.style["display"] = "none";
-})
+});
 
 createNewGame.addEventListener("click", function (event) {
-    while (gameBoard.firstChild) {
-        gameBoard.removeChild(gameBoard.firstChild);
+
+    for (let index = gameBoard.childNodes.length - 1; index >= 0; index--) {
+        gameBoard.removeChild(gameBoard.childNodes[index]);
     }
     shuffleArray(colors);
     createCards(colors);
@@ -155,6 +178,5 @@ createNewGame.addEventListener("click", function (event) {
     home.style["display"] = "none";
     gameBoard.style["display"] = "flex";
     gameButtons.style["display"] = "flex";
+});
 
-
-})
