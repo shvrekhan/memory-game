@@ -68,7 +68,6 @@ homeButton.addEventListener("click", function (event) {
 
 gameBoard.addEventListener("click", function (event) {
     const tag = event.target.tagName
-    // console.log(event.target.classList.contains("blocked"));
     if (event.target.nodeName == "DIV" && clickedCount < 2) {
 
         if (clickedCount == 0 && !(event.target.classList.contains("blocked"))) {
@@ -113,7 +112,6 @@ gameBoard.addEventListener("click", function (event) {
             }
 
         }
-        console.log(totalMatch);
 
         if (totalMatch == 5) {
             setTimeout(function () {
