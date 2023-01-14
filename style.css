@@ -201,6 +201,10 @@ li {
   font-size: 1.3rem;
 }
 
+#best-score{
+  font-size: 1rem;
+}
+
 @media screen and (max-device-width: 480px) {
   #parent {
     display: flex;
