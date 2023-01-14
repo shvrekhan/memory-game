@@ -91,7 +91,12 @@ body {
 .purple {
   background-color: purple;
 }
-
+.voilet {
+  background-color: violet;
+}
+.pink {
+  background-color: pink;
+}
 .front-card {
   display: none;
 }
@@ -201,7 +206,7 @@ li {
   font-size: 1.3rem;
 }
 
-#best-score{
+#best-score {
   font-size: 1rem;
 }
 
