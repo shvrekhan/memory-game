@@ -210,7 +210,6 @@ li {
   #game-container {
     display: none;
     flex-wrap: wrap;
-    border: 1px solid red;
     width: 85vw;
     height: 70vh;
     margin: auto;
@@ -221,11 +220,8 @@ li {
 
   .card {
     width: 11rem;
-    height: 30%;
-    /* background-color: black; */
+    height: 19rem;
     border: none;
     border-radius: 0.9rem;
-  
-    /* margin: .4rem; */
   }
 }
