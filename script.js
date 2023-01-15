@@ -3,6 +3,7 @@ const homeLogo = document.querySelector("#home-logo");
 
 const infoBar = document.querySelector("#info-bar");
 const message = document.querySelector("#message");
+const currentCounts = document.querySelector("#guess-taken");
 const currentResult = document.querySelector("#current-result");
 const timer = document.querySelector("#timer");
 
@@ -17,7 +18,6 @@ const medium = document.querySelector("#medium");
 const hard = document.querySelector("#hard");
 
 const gameControls = document.querySelector("#pause-newgame");
-const pause = document.querySelector("#pause-resume");
 const newGame = document.querySelector("#new-game");
 
 const globalResult = document.querySelector("#global-result");
@@ -59,9 +59,6 @@ hard.addEventListener("click", function () {
     createGame(level);
 });
 
-pause.addEventListener("click", function () {
-    console.log("pause");
-});
 
 newGame.addEventListener("click", function () {
     console.log("new game");
@@ -128,13 +125,15 @@ function handelClick(event) {
     console.log(event.target)
     if (clickedCount < 2) {
         if (clickedCount == 0 && !(event.target.classList.contains("blocked"))) {
-
             event.target.style["background-color"] = `${event.target.dataset.color}`;
             firstCard = event.target;
             firstCard.classList.add("blocked");
             clickedCount++;
             totalCount++;
-            // currentCounts.textContent = `Total guess - ${totalCount}`;
+            currentCounts.textContent = `Total guess - ${totalCount}`;
+            if (totalCount === 1) {
+                gameTimer();
+            }
 
         } else if (clickedCount == 1 && !(event.target.classList.contains("blocked"))) {
 
@@ -143,7 +142,7 @@ function handelClick(event) {
             secondCard.classList.add("blocked");
             clickedCount++;
             totalCount++;
-            // currentCounts.textContent = `Total guess - ${totalCount}`;
+            currentCounts.textContent = `Total guess - ${totalCount}`;
         }
 
         if (clickedCount == 2) {
@@ -181,6 +180,7 @@ function handelClick(event) {
             if (totalMatch == totalCardsToMatch) {
                 // console.log(previousResult);
                 // if (Number(previousResult) > totalCount || previousResult == null) {
+                clearInterval(gameTimer);
                 console.log("ok");
                 localStorage.setItem("Best", JSON.stringify(totalCount));
                 // }
@@ -198,9 +198,6 @@ function handelClick(event) {
 
     }
 }
-
-
-
 
 
 
@@ -224,3 +221,22 @@ function showHome() {
 
 }
 
+
+function gameTimer() {
+    let startTime = new Date().getTime();
+
+    setInterval(() => {
+
+        let now = new Date().getTime();
+        let elapsed = now - startTime;
+        let minutes = Math.floor((elapsed % (1000 * 60 * 60)) / (1000 * 60));
+        let seconds = Math.floor((elapsed % (1000 * 60)) / 1000);
+
+        if (seconds < 10) {
+            seconds = "0" + seconds;
+        }
+
+        let currentTime = minutes + ':' + seconds;
+        timer.textContent = `${currentTime}`;
+    }, 900);
+}
