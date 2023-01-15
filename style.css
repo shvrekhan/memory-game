@@ -1,6 +1,7 @@
 * {
   padding: 0;
   margin: 0;
+  box-sizing: border-box;
 }
 
 body {
@@ -9,234 +10,104 @@ body {
   color: white;
 }
 
-.parent-container {
+#parent-container {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  /* align-items: center; */
 }
 
-.parent-container > .header {
+#header {
   display: flex;
-  flex-basis: 100%;
   justify-content: space-around;
-  padding-top: 1rem;
-  padding-bottom: 1rem;
-  /* border: 1px solid red; */
+  align-items: center;
+  padding: 0.5rem;
 }
 
-.parent-container > .header > .game-name {
+#header > #logo {
+  font-size: 1.5rem;
+}
+
+#info-bar {
+  border: 1px solid red;
+  display: none;
+  justify-content: space-around;
+  align-items: center;
+  font-size: 1.5rem;
+}
+
+#instruction {
+  margin-top: 1rem;
+  border: 1px solid red;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0.9rem;
+}
+
+#instruction > .inst {
   font-size: 2rem;
 }
 
-#game-container {
-  display: none;
-  flex-wrap: wrap;
-  /* border: 1px solid red; */
-  width: 85vw;
-  height: 70vh;
-  margin: auto;
-  margin-top: 1.4rem;
-  justify-content: space-around;
-  align-items: center;
+#instruction > .instruction-list {
+  font-size: 1.5rem;
 }
 
-.btn-container {
-  /* border: 1px red solid; */
-  margin-top: 1rem;
+#game-board-container {
   display: none;
   justify-content: center;
-  align-items: flex-end;
 }
-
-#btn-reset {
-  background-color: white;
-  border: none;
-  width: 4rem;
-  height: 2.5rem;
-  border-radius: 0.6rem;
-  margin-right: 0.4rem;
-}
-
-#btn-home {
-  background-color: white;
-  border: none;
-  width: 4rem;
-  height: 2.5rem;
-  border-radius: 0.6rem;
+#game-board {
+  border: 1px solid red;
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 1rem;
+  justify-content: space-evenly;
+  width: 80vw;
+  height: 80vh;
+  padding: 0.4rem;
 }
 
 .card {
-  width: 18%;
-  height: 30%;
-  background-color: black;
-  border: none;
+  width: 18vw;
+  height: 18vh;
+  
+  border: 1px solid black;
   border-radius: 0.9rem;
-
-  /* margin: .4rem; */
 }
 
-.red {
-  background-color: red;
+
+#difficulty {
+  border: 1px solid red;
+  margin-top: 1.5rem;
+  display: flex;
+  justify-content: space-evenly;
+  padding: 0.5rem;
 }
-.blue {
-  background-color: blue;
+
+button {
+  background-color: rgb(164, 120, 58);
+  height: 2.9rem;
+  width: 9rem;
+  border: none;
+  border-radius: 0.5rem;
+  color: white;
+  font-weight: bold;
+  font-size: 0.95rem;
+  margin-right: 0.7rem;
 }
-.green {
-  background-color: green;
-}
-.orange {
-  background-color: orange;
-}
-.purple {
-  background-color: purple;
-}
-.voilet {
-  background-color: violet;
-}
-.pink {
-  background-color: pink;
-}
-.front-card {
+
+#pause-newgame {
+  margin-top: 1rem;
   display: none;
+  justify-content: space-evenly;
+  border: 1px solid red;
+  padding: 0.5rem;
 }
 
-.home {
+#global-result {
+  border: 1px solid red;
+  margin-top: 1rem;
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 1rem;
-  /* border: 1px solid red; */
-  width: 70%;
-  margin-top: 5rem;
-  align-self: center;
-  gap: 2.4rem;
-}
-
-.home > h4 {
-  font-size: 2.5rem;
-}
-
-li {
-  font-size: 1rem;
-}
-
-#new-game-btns {
-  display: flex;
-  margin-bottom: 2rem;
-}
-
-#new-game-btns > #new-game-color {
-  background-color: rgb(164, 120, 58);
-  height: 2.9rem;
-  width: 9rem;
-  border: none;
-  border-radius: 0.5rem;
-  color: white;
-  font-weight: bold;
-  font-size: 0.95rem;
-  margin-right: 0.7rem;
-}
-
-#new-game-btns > #new-game-gif {
-  background-color: rgb(164, 120, 58);
-  height: 2.9rem;
-  width: 9rem;
-  border: none;
-  border-radius: 0.5rem;
-  color: white;
-  font-weight: bold;
-  font-size: 0.95rem;
-}
-
-.message {
-  /* border: 1px solid red; */
-  height: 1.7rem;
-  text-align: center;
-  display: flex;
-  justify-content: center;
-}
-
-#match-message {
+  justify-content: space-evenly;
   font-size: 1.5rem;
-  justify-content: center;
-}
-
-#win-message {
-  font-size: 1.5rem;
-}
-
-#btn-home {
-  background-color: rgb(164, 120, 58);
-  height: 2.9rem;
-  width: 9rem;
-  border: none;
-  border-radius: 0.5rem;
-  color: white;
-  font-weight: bold;
-  font-size: 0.95rem;
-}
-
-#new-game {
-  background-color: rgb(164, 120, 58);
-  height: 2.9rem;
-  width: 9rem;
-  border: none;
-  border-radius: 0.5rem;
-  color: white;
-  font-weight: bold;
-  font-size: 0.95rem;
-  margin-right: 0.7rem;
-}
-#create-new-game {
-  background-color: rgb(164, 120, 58);
-  height: 2.9rem;
-  width: 9rem;
-  border: none;
-  border-radius: 0.5rem;
-  color: white;
-  font-weight: bold;
-  font-size: 0.95rem;
-  margin-right: 0.7rem;
-}
-
-#score {
-  align-self: center;
-  font-size: 1.3rem;
-}
-
-#best-score {
-  font-size: 1rem;
-}
-
-#current-stat {
-  display: flex;
-  justify-content: space-around;
-  font-size: 1rem;
-}
-
-@media screen and (max-device-width: 480px) {
-  #parent {
-    display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
-  }
-  #game-container {
-    display: none;
-    flex-wrap: wrap;
-    width: 85vw;
-    height: 70vh;
-    margin: auto;
-    margin-top: 1.4rem;
-    justify-content: space-around;
-    align-items: center;
-  }
-
-  .card {
-    width: 11rem;
-    height: 19rem;
-    border: none;
-    border-radius: 0.9rem;
-  }
+  padding: 0.5rem;
 }
