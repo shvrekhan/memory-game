@@ -27,11 +27,25 @@ body {
 }
 
 #info-bar {
-  border: 1px solid red;
   display: none;
   justify-content: space-around;
   align-items: center;
   font-size: 1.5rem;
+}
+
+#message {
+  border: 1px solid red;
+  flex-basis: 25%;
+  margin-left: 1rem;
+}
+#guess-taken {
+  flex-basis: 25%;
+}
+#current-result {
+  flex-basis: 25%;
+}
+#timer {
+  flex-basis: 25%;
 }
 
 #instruction {
@@ -69,7 +83,8 @@ body {
 .card {
   width: 18vw;
   height: 18vh;
-
+  /* background: url(./gifs/question-mark-animation.gif); */
+  background-size: cover;
   border: 1px solid black;
   border-radius: 0.9rem;
 }
