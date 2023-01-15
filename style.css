@@ -69,11 +69,10 @@ body {
 .card {
   width: 18vw;
   height: 18vh;
-  
+
   border: 1px solid black;
   border-radius: 0.9rem;
 }
-
 
 #difficulty {
   border: 1px solid red;
@@ -110,4 +109,8 @@ button {
   justify-content: space-evenly;
   font-size: 1.5rem;
   padding: 0.5rem;
+}
+
+.none {
+  display: none;
 }
