@@ -21,6 +21,8 @@ const gameControls = document.querySelector("#pause-newgame");
 const newGame = document.querySelector("#new-game");
 
 const globalResult = document.querySelector("#global-result");
+const bestTime = document.querySelector("#best-time");
+const bestCount = document.querySelector("#best-count");
 
 let totalCardsToMatch = 0;
 let clickedCount = 0;
@@ -38,6 +40,7 @@ for (let index = 0; index <= 36; index++) {
 
 
 homeLogo.addEventListener("click", function () {
+    deleteGame();
     showHome();
 });
 
@@ -61,12 +64,10 @@ hard.addEventListener("click", function () {
 
 
 newGame.addEventListener("click", function () {
-    console.log("new game");
+    createNewGame();
+
 });
 
-gameBoard.addEventListener("click", function (event) {
-
-})
 
 
 
@@ -178,18 +179,17 @@ function handelClick(event) {
             }
 
             if (totalMatch == totalCardsToMatch) {
-                // console.log(previousResult);
-                // if (Number(previousResult) > totalCount || previousResult == null) {
-                clearInterval(gameTimer);
-                console.log("ok");
-                localStorage.setItem("Best", JSON.stringify(totalCount));
-                // }
+                if (Number(previousResult) > totalCount || previousResult == null) {
+                    clearInterval(gameTimer);
+                    console.log("ok");
+                    localStorage.setItem("Best", JSON.stringify(totalCount));
+                }
 
                 setTimeout(function () {
-                    // winMessage.textContent = "Congratulations! You have successfully matched all the cards and won the memory game!";
+                    winMessage.textContent = "Congratulations! You have successfully matched all the cards and won the memory game!";
                 }, 1 * 1000);
                 setTimeout(function () {
-                    // winMessage.textContent = "";
+                    winMessage.textContent = "";
                 }, 1.5 * 1000);
 
             }
@@ -225,7 +225,7 @@ function showHome() {
 function gameTimer() {
     let startTime = new Date().getTime();
 
-    setInterval(() => {
+    const timeStamp = setInterval(() => {
 
         let now = new Date().getTime();
         let elapsed = now - startTime;
@@ -239,4 +239,15 @@ function gameTimer() {
         let currentTime = minutes + ':' + seconds;
         timer.textContent = `${currentTime}`;
     }, 900);
+}
+
+function deleteGame() {
+    for (let index = gameBoard.childNodes.length - 1; index >= 0; index--) {
+        gameBoard.removeChild(gameBoard.childNodes[index]);
+    }
+}
+
+function createNewGame() {
+    location.reload();
+
 }
