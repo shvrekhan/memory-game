@@ -23,12 +23,19 @@ const newGame = document.querySelector("#new-game");
 const globalResult = document.querySelector("#global-result");
 
 let totalCardsToMatch = 0;
-let previousCard = null;
+let clickedCount = 0;
+let totalCount = 0;
+let totalMatch = 0;
+let firstCard, secondCard;
 
-const imgArray = [];
-for (let index = 1; index <= 36; index++) {
-    imgArray.push(`${index}.gif`);
+let colorArray = [];
+for (let index = 0; index <= 36; index++) {
+    const red = Math.floor(Math.random() * 256);
+    const green = Math.floor(Math.random() * 256);
+    const blue = Math.floor(Math.random() * 256);
+    colorArray.push("rgb(" + red + ", " + green + ", " + blue + ")");
 }
+
 
 homeLogo.addEventListener("click", function () {
     showHome();
@@ -78,7 +85,7 @@ function shuffleArray(array) {
 
 
 function createGame(level = 4) {
-    const shuffledImages = shuffleArray(imgArray);
+    const shuffledImages = shuffleArray(colorArray);
     const imageNeeded = shuffledImages.slice(0, Math.floor((level * level) / 2));
     totalCardsToMatch = imageNeeded.length;
     const shuffledPaired = shuffleArray([...imageNeeded, ...imageNeeded]);
@@ -108,35 +115,92 @@ function createGame(level = 4) {
 function createDivsForColors(colorArray) {
     for (let color of colorArray) {
         const newDiv = document.createElement("div");
-        newDiv.dataset.gif = `${color}`;
+        newDiv.dataset.color = `${color}`;
+        newDiv.classList.add("card");
+        newDiv.style["background-color"] = `black`
+        newDiv.addEventListener("click", handelClick);
 
-        const frontImage = document.createElement("div");
-        const image = document.createElement("img");
-        image.classList.add("card");
-        image.src = "./gifs/question-mark-animation.gif";
-        frontImage.appendChild(image);
-
-        const backImage = document.createElement("div");
-        backImage.classList.add("card", "none");
-        backImage.style.background = `url(gifs/${color})`;
-
-        newDiv.appendChild(frontImage);
-        newDiv.appendChild(backImage);
-
-        newDiv.addEventListener("click", handleCardClick, { capture: true });
         gameBoard.append(newDiv);
     }
 }
 
-// TODO: Implement this function!
-function handleCardClick(event) {
-    // you can use event.target to see which element was clicked
-    event.stopPropagation();
-    console.log("you clicked", event.target.parentNode.parentNode);
+function handelClick(event) {
+    console.log(event.target)
+    if (clickedCount < 2) {
+        if (clickedCount == 0 && !(event.target.classList.contains("blocked"))) {
 
-    let currentCard = event.target.parentNode.parentNode;
+            event.target.style["background-color"] = `${event.target.dataset.color}`;
+            firstCard = event.target;
+            firstCard.classList.add("blocked");
+            clickedCount++;
+            totalCount++;
+            // currentCounts.textContent = `Total guess - ${totalCount}`;
 
+        } else if (clickedCount == 1 && !(event.target.classList.contains("blocked"))) {
+
+            event.target.style["background-color"] = `${event.target.dataset.color}`;
+            secondCard = event.target;
+            secondCard.classList.add("blocked");
+            clickedCount++;
+            totalCount++;
+            // currentCounts.textContent = `Total guess - ${totalCount}`;
+        }
+
+        if (clickedCount == 2) {
+            if (firstCard.dataset.color != secondCard.dataset.color) {
+                firstCard.style["border"] = " 0.4rem solid red";
+                secondCard.style["border"] = " 0.4rem solid red";
+                message.textContent = "Match failed !!!";
+
+                setTimeout(function () {
+                    clickedCount = 0;
+                    firstCard.classList.remove("blocked");
+                    secondCard.classList.remove("blocked");
+                    firstCard.style["background-color"] = "black";
+                    secondCard.style["background-color"] = "black";;
+                    firstCard.style.border = null;
+                    secondCard.style.border = null;
+
+                }, 1000);
+                setTimeout(function () {
+                    message.textContent = "";
+                }, 1000);
+            } else if (firstCard.dataset.color == secondCard.dataset.color) {
+                clickedCount = 0;
+                totalMatch++;
+                firstCard.style["border"] = " 0.4rem solid green";
+                secondCard.style["border"] = " 0.4rem solid green";
+                message.textContent = "You got a match!";
+                console.log(totalMatch);
+                currentResult.textContent = `Current Score - ${totalMatch}`;
+                setTimeout(function () {
+                    message.textContent = "";
+                }, 1000);
+            }
+
+            if (totalMatch == totalCardsToMatch) {
+                // console.log(previousResult);
+                // if (Number(previousResult) > totalCount || previousResult == null) {
+                console.log("ok");
+                localStorage.setItem("Best", JSON.stringify(totalCount));
+                // }
+
+                setTimeout(function () {
+                    // winMessage.textContent = "Congratulations! You have successfully matched all the cards and won the memory game!";
+                }, 1 * 1000);
+                setTimeout(function () {
+                    // winMessage.textContent = "";
+                }, 1.5 * 1000);
+
+            }
+
+        }
+
+    }
 }
+
+
+
 
 
 
