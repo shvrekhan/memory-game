@@ -109,7 +109,6 @@ body {
 }
 
 #difficulty {
-  /* border: 1px solid red; */
   margin-top: 1.5rem;
   display: flex;
   justify-content: space-evenly;
@@ -142,12 +141,10 @@ button:hover {
   margin-top: 1rem;
   display: none;
   justify-content: space-evenly;
-  /* border: 1px solid red; */
   padding: 0.5rem;
 }
 
 #global-result {
-  /* border: 1px solid red; */
   margin-top: 1rem;
   display: flex;
   justify-content: space-evenly;
