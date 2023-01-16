@@ -26,7 +26,14 @@
         <div id="current-result">Current Score - 0</div>
         <div id="timer"></div>
       </section>
-      <div id="winner"></div>
+      <section id="global-result">
+        <div id="best-count">Min counts Taken -</div>
+      </section>
+      <section id="winner">
+        <h3>You Won !</h3>
+        <h4>You successfully matched all cards.</h4>
+        <button id="new-game-win">New Game</button>
+      </section>
       <section id="instruction">
         <h3 class="inst">Instructions</h3>
         <ol class="instruction-list" type="number">
@@ -55,12 +62,16 @@
       </section>
     </div>
 
-    <section id="pause-newgame">
-      <button id="new-game">New Game</button>
-    </section>
-
-    <section id="global-result">
-      <div id="best-count">Min counts Taken -</div>
+    <section id="reset-promt">
+      <button id="reset-game">Reset Game</button>
+      <section id="reset">
+        <h3>Do You Really want to Quit?</h3>
+        <h4>Your progress would be lost..!</h4>
+        <div class="btn">
+          <button id="yes-reset">Yes</button>
+          <button id="no-reset">No</button>
+        </div>
+      </section>
     </section>
 
     <script src="./script.js"></script>
