@@ -19,13 +19,17 @@ const easy = document.querySelector("#easy");
 const medium = document.querySelector("#medium");
 const hard = document.querySelector("#hard");
 
-const gameControls = document.querySelector("#pause-newgame");
-const newGame = document.querySelector("#new-game");
+const resetGame = document.querySelector("#reset-game");
+const resetMsg = document.querySelector("#reset");
 
 const globalResult = document.querySelector("#global-result");
 const bestTime = document.querySelector("#best-time");
 const bestCount = document.querySelector("#best-count");
 
+const yesReset = document.querySelector("#yes-reset");
+const noReset = document.querySelector("#no-reset");
+
+const newGameWin = document.querySelector("#new-game-win");
 let totalCardsToMatch = 0;
 let clickedCount = 0;
 let totalCount = 0;
@@ -35,7 +39,7 @@ let firstCard, secondCard, timeStamp;
 
 const best = localStorage.getItem("Best");
 if (best == null) {
-    bestCount.textContent = `Min Guess Taken - NIL`;
+    bestCount.textContent = `Min Guess Taken - 0`;
 } else {
     bestCount.textContent = `Min Guess Taken -${best}`;
 }
@@ -51,12 +55,13 @@ for (let index = 0; index <= 36; index++) {
 
 
 homeLogo.addEventListener("click", function () {
-    deleteGame();
-    showHome();
+    createNewGame();
+
 });
 
 easy.addEventListener("click", function () {
     const level = 4;
+    console.log("60")
     hideHome();
     createGame(level);
 });
@@ -74,10 +79,21 @@ hard.addEventListener("click", function () {
 });
 
 
-newGame.addEventListener("click", function () {
-    createNewGame();
+resetGame.addEventListener("click", function (event) {
+    resetMsg.style["display"] = "flex";
+});
+
+yesReset.addEventListener("click", function (event) {
+    location.reload();
 
 });
+noReset.addEventListener("click", function () {
+    resetMsg.style["display"] = "none";
+});
+
+newGameWin.querySelector("click", function () {
+    location.reload();
+})
 
 
 
@@ -98,6 +114,7 @@ function createGame(level = 4) {
     const imageNeeded = shuffledImages.slice(0, Math.floor((level * level) / 2));
     totalCardsToMatch = imageNeeded.length;
     const shuffledPaired = shuffleArray([...imageNeeded, ...imageNeeded]);
+    console.log(shuffledPaired);
 
     if (level == 4) {
         createDivsForColors(shuffledPaired);
@@ -187,18 +204,16 @@ function handelClick(event) {
             }
 
             if (totalMatch == totalCardsToMatch) {
-                clearInterval(gameTimer);
+                clearInterval(timeStamp);
                 if (Number(best) > totalCount) {
+                    console.log("win");
+                    localStorage.setItem("Best", JSON.stringify(totalCount));
+                } else {
                     localStorage.setItem("Best", JSON.stringify(totalCount));
                 }
-
-                setTimeout(function () {
-                    winMessage.textContent = "Congratulations! You have successfully matched all the cards and won the memory game!";
-                }, 1 * 1000);
-                setTimeout(function () {
-                    winMessage.textContent = "";
-                }, 1.5 * 1000);
-
+                gameBoard.style["display"] = "none";
+                winMessage.style["display"] = "flex";
+                resetGame.style["display"] = "none";
 
             }
 
@@ -214,7 +229,7 @@ function hideHome() {
     instructions.style["display"] = "none";
     gameBoardContainer.style["display"] = "flex";
     difficulty.style["display"] = "none";
-    gameControls.style["display"] = "flex";
+    resetGame.style["display"] = "flex";
     globalResult.style["display"] = "none";
 
 }
