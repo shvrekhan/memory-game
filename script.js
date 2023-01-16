@@ -7,6 +7,8 @@ const currentCounts = document.querySelector("#guess-taken");
 const currentResult = document.querySelector("#current-result");
 const timer = document.querySelector("#timer");
 
+const winMessage = document.querySelector("#winner");
+
 const instructions = document.querySelector("#instruction");
 
 const gameBoardContainer = document.querySelector("#game-board-container");
@@ -28,7 +30,11 @@ let totalCardsToMatch = 0;
 let clickedCount = 0;
 let totalCount = 0;
 let totalMatch = 0;
-let firstCard, secondCard;
+let firstCard, secondCard, timeStamp;
+
+const best = localStorage.getItem("Best");
+bestCount.textContent = `Min counts Taken -${best}`;
+
 
 let colorArray = [];
 for (let index = 0; index <= 36; index++) {
@@ -138,6 +144,7 @@ function handelClick(event) {
 
         } else if (clickedCount == 1 && !(event.target.classList.contains("blocked"))) {
 
+            clearInterval(timeStamp);
             event.target.style["background-color"] = `${event.target.dataset.color}`;
             secondCard = event.target;
             secondCard.classList.add("blocked");
@@ -179,9 +186,8 @@ function handelClick(event) {
             }
 
             if (totalMatch == totalCardsToMatch) {
-                if (Number(previousResult) > totalCount || previousResult == null) {
+                if (Number(best) > totalCount) {
                     clearInterval(gameTimer);
-                    console.log("ok");
                     localStorage.setItem("Best", JSON.stringify(totalCount));
                 }
 
@@ -225,7 +231,7 @@ function showHome() {
 function gameTimer() {
     let startTime = new Date().getTime();
 
-    const timeStamp = setInterval(() => {
+    timeStamp = setInterval(() => {
 
         let now = new Date().getTime();
         let elapsed = now - startTime;
