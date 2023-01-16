@@ -35,6 +35,9 @@ body {
   font-weight: bold;
 }
 
+#home-logo:hover {
+  cursor: pointer;
+}
 #info-bar {
   display: none;
   justify-content: space-around;
