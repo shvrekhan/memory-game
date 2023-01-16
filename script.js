@@ -93,7 +93,6 @@ function createGame(level = 4) {
     const imageNeeded = shuffledImages.slice(0, Math.floor((level * level) / 2));
     totalCardsToMatch = imageNeeded.length;
     const shuffledPaired = shuffleArray([...imageNeeded, ...imageNeeded]);
-    console.log(shuffledPaired);
 
     if (level == 4) {
         createDivsForColors(shuffledPaired);
@@ -129,7 +128,6 @@ function createDivsForColors(colorArray) {
 }
 
 function handelClick(event) {
-    console.log(event.target)
     if (clickedCount < 2) {
         if (clickedCount == 0 && !(event.target.classList.contains("blocked"))) {
             event.target.style["background-color"] = `${event.target.dataset.color}`;
@@ -178,7 +176,6 @@ function handelClick(event) {
                 firstCard.style["border"] = " 0.4rem solid green";
                 secondCard.style["border"] = " 0.4rem solid green";
                 message.textContent = "You got a match!";
-                console.log(totalMatch);
                 currentResult.textContent = `Current Score - ${totalMatch}`;
                 setTimeout(function () {
                     message.textContent = "";
