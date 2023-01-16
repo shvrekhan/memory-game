@@ -98,6 +98,7 @@ function createGame(level = 4) {
     const imageNeeded = shuffledImages.slice(0, Math.floor((level * level) / 2));
     totalCardsToMatch = imageNeeded.length;
     const shuffledPaired = shuffleArray([...imageNeeded, ...imageNeeded]);
+    // console.log(shuffledPaired);
 
     if (level == 4) {
         createDivsForColors(shuffledPaired);
@@ -147,7 +148,7 @@ function handelClick(event) {
 
         } else if (clickedCount == 1 && !(event.target.classList.contains("blocked"))) {
 
-            clearInterval(timeStamp);
+            // clearInterval(timeStamp);
             event.target.style["background-color"] = `${event.target.dataset.color}`;
             secondCard = event.target;
             secondCard.classList.add("blocked");
@@ -188,8 +189,9 @@ function handelClick(event) {
             }
 
             if (totalMatch == totalCardsToMatch) {
+                // console.log("ok");
+                clearInterval(gameTimer);
                 if (Number(best) > totalCount) {
-                    clearInterval(gameTimer);
                     localStorage.setItem("Best", JSON.stringify(totalCount));
                 }
 
@@ -199,6 +201,7 @@ function handelClick(event) {
                 setTimeout(function () {
                     winMessage.textContent = "";
                 }, 1.5 * 1000);
+
 
             }
 
