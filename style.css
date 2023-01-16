@@ -136,12 +136,40 @@ button:hover {
   background-image: linear-gradient(rgb(122, 77, 60), rgb(122, 77, 60));
   cursor: pointer;
 }
+#reset-promt {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 
-#pause-newgame {
-  margin-top: 1rem;
+#reset {
   display: none;
-  justify-content: space-evenly;
-  padding: 0.5rem;
+  flex-direction: column;
+  background-color: rgb(48, 118, 89);
+  border: 1.5rem solid rgb(122, 77, 60);
+  padding: 1rem;
+  gap: 1rem;
+}
+#reset-game {
+  margin-top: 0.3rem;
+  display: none;
+  align-items: center;
+  justify-content: center;
+}
+
+#reset > h4 {
+  align-self: center;
+  font-size: 1.5rem;
+}
+
+#reset > h3 {
+  align-self: center;
+  font-size: 2rem;
+}
+
+#reset > .btn {
+  display: flex;
+  justify-content: center;
 }
 
 #global-result {
@@ -150,6 +178,29 @@ button:hover {
   justify-content: space-evenly;
   font-size: 1.5rem;
   padding: 0.5rem;
+}
+
+#winner {
+  display: none;
+  flex-direction: column;
+  background-color: rgb(48, 118, 89);
+  border: 1.5rem solid rgb(122, 77, 60);
+  padding: 1rem;
+  gap: 1rem;
+}
+
+#winner > h4 {
+  align-self: center;
+  font-size: 1.5rem;
+}
+
+#winner > h3 {
+  align-self: center;
+  font-size: 2rem;
+}
+
+#winner > #new-game-win {
+  align-self: center;
 }
 
 @media screen and (max-device-width: 480px) {
