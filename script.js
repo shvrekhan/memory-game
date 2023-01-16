@@ -61,7 +61,6 @@ homeLogo.addEventListener("click", function () {
 
 easy.addEventListener("click", function () {
     const level = 4;
-    console.log("60")
     hideHome();
     createGame(level);
 });
@@ -114,7 +113,6 @@ function createGame(level = 4) {
     const imageNeeded = shuffledImages.slice(0, Math.floor((level * level) / 2));
     totalCardsToMatch = imageNeeded.length;
     const shuffledPaired = shuffleArray([...imageNeeded, ...imageNeeded]);
-    console.log(shuffledPaired);
 
     if (level == 4) {
         createDivsForColors(shuffledPaired);
@@ -206,7 +204,6 @@ function handelClick(event) {
             if (totalMatch == totalCardsToMatch) {
                 clearInterval(timeStamp);
                 if (Number(best) > totalCount) {
-                    console.log("win");
                     localStorage.setItem("Best", JSON.stringify(totalCount));
                 } else {
                     localStorage.setItem("Best", JSON.stringify(totalCount));
