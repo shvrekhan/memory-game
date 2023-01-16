@@ -32,8 +32,13 @@ let totalCount = 0;
 let totalMatch = 0;
 let firstCard, secondCard, timeStamp;
 
+
 const best = localStorage.getItem("Best");
-bestCount.textContent = `Min counts Taken -${best}`;
+if (best == null) {
+    bestCount.textContent = `Min counts Taken - NIL`;
+} else {
+    bestCount.textContent = `Min counts Taken -${best}`;
+}
 
 
 let colorArray = [];
