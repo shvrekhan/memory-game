@@ -35,9 +35,9 @@ let firstCard, secondCard, timeStamp;
 
 const best = localStorage.getItem("Best");
 if (best == null) {
-    bestCount.textContent = `Min counts Taken - NIL`;
+    bestCount.textContent = `Min Guess Taken - NIL`;
 } else {
-    bestCount.textContent = `Min counts Taken -${best}`;
+    bestCount.textContent = `Min Guess Taken -${best}`;
 }
 
 
@@ -98,22 +98,21 @@ function createGame(level = 4) {
     const imageNeeded = shuffledImages.slice(0, Math.floor((level * level) / 2));
     totalCardsToMatch = imageNeeded.length;
     const shuffledPaired = shuffleArray([...imageNeeded, ...imageNeeded]);
-    // console.log(shuffledPaired);
 
     if (level == 4) {
         createDivsForColors(shuffledPaired);
     } else if (level == 6) {
         createDivsForColors(shuffledPaired);
         document.querySelectorAll('#game-board .card').forEach(function (cardNode) {
-            cardNode.style['width'] = `12vw`;
-            cardNode.style['height'] = `12vh`;
+            cardNode.style['width'] = `11vw`;
+            cardNode.style['height'] = `11vh`;
         });
 
     } else {
         createDivsForColors(shuffledPaired);
         document.querySelectorAll('#game-board .card').forEach(function (cardNode) {
-            cardNode.style["width"] = "9vw";
-            cardNode.style["height"] = "9vh";
+            cardNode.style["width"] = "8vw";
+            cardNode.style["height"] = "8vh";
         })
 
     }
@@ -126,7 +125,7 @@ function createDivsForColors(colorArray) {
         const newDiv = document.createElement("div");
         newDiv.dataset.color = `${color}`;
         newDiv.classList.add("card");
-        newDiv.style["background-color"] = `black`
+        newDiv.style["background-color"] = `rgb(227,201,161)`
         newDiv.addEventListener("click", handelClick);
 
         gameBoard.append(newDiv);
@@ -148,7 +147,6 @@ function handelClick(event) {
 
         } else if (clickedCount == 1 && !(event.target.classList.contains("blocked"))) {
 
-            // clearInterval(timeStamp);
             event.target.style["background-color"] = `${event.target.dataset.color}`;
             secondCard = event.target;
             secondCard.classList.add("blocked");
@@ -167,8 +165,8 @@ function handelClick(event) {
                     clickedCount = 0;
                     firstCard.classList.remove("blocked");
                     secondCard.classList.remove("blocked");
-                    firstCard.style["background-color"] = "black";
-                    secondCard.style["background-color"] = "black";;
+                    firstCard.style["background-color"] = "rgb(227,201,161)";
+                    secondCard.style["background-color"] = "rgb(227,201,161)";
                     firstCard.style.border = null;
                     secondCard.style.border = null;
 
@@ -189,7 +187,6 @@ function handelClick(event) {
             }
 
             if (totalMatch == totalCardsToMatch) {
-                // console.log("ok");
                 clearInterval(gameTimer);
                 if (Number(best) > totalCount) {
                     localStorage.setItem("Best", JSON.stringify(totalCount));
