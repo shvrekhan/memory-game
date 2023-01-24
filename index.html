@@ -1,13 +1,79 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>Memory game
+  <head>
     <meta charset="UTF-8" />
-    <title>Memory Game!</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="style.css" />
+    <script
+      src="https://kit.fontawesome.com/a44113e352.js"
+      crossorigin="anonymous"
+    ></script>
+    <title>Memory Game</title>
   </head>
   <body>
-    <h1>Memory Game!</h1>
-    <div id="game">
-    <script src="script.js"></script>
+    <div id="parent-container">
+      <nav id="header">
+        <div id="logo">Memory Game</div>
+        <div id="home-logo">
+          <i class="fa-solid fa-house fa-4x" id="home-button"></i>
+        </div>
+      </nav>
+
+      <section id="info-bar">
+        <div id="message"></div>
+        <div id="guess-taken"></div>
+        <div id="current-result">Current Score - 0</div>
+        <div id="timer"></div>
+      </section>
+      <section id="global-result">
+        <div id="best-count">Min counts Taken -</div>
+      </section>
+      <section id="winner">
+        <h3>You Won !</h3>
+        <h4>You successfully matched all cards.</h4>
+        <button id="new-game-win">New Game</button>
+      </section>
+      <section id="instruction">
+        <h3 class="inst">Instructions</h3>
+        <ol class="instruction-list" type="number">
+          <li>The game will display a set of cards face down on the screen.</li>
+          <li>Click on two cards to flip them over and reveal their colors.</li>
+          <li>
+            If the colors match, they will stay face up and you can continue to
+            the next pair.
+          </li>
+          <li>
+            If the colors do not match, the cards will flip back over and you
+            can try again.
+          </li>
+          <li>The game ends when all pairs have been found.</li>
+        </ol>
+      </section>
+
+      <section id="game-board-container">
+        <section id="game-board"></section>
+      </section>
+
+      <section id="difficulty">
+        <button id="easy">Easy</button>
+        <button id="medium">Medium</button>
+        <button id="hard">Hard</button>
+      </section>
+    </div>
+
+    <section id="reset-promt">
+      <button id="reset-game">Reset Game</button>
+      <section id="reset">
+        <h3>Do You Really want to Quit?</h3>
+        <h4>Your progress would be lost..!</h4>
+        <div class="btn">
+          <button id="yes-reset">Yes</button>
+          <button id="no-reset">No</button>
+        </div>
+      </section>
+    </section>
+
+    <script src="./script.js"></script>
   </body>
 </html>
